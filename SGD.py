@@ -17,15 +17,18 @@ def calculate_stochastic_gradient(y, X, w, lambda_, n, num_examples):
 
 
 def main():
+    # Do The Master need to do a cross correlation in order to find the best params (gamma and lambda) ???
 
     # Downloaded from https://inclass.kaggle.com/c/epfml-project-1/data
     # Just to test if SGD works
     DATA_TRAIN_PATH = 'train.csv'
 
     # load_csv_data is for this data only. Ask the teacher how he will give the data to parse it in a good way.
+    # This need to be done in the Master part
     y, X, ids = load_csv_data(DATA_TRAIN_PATH, sub_sample=True)
     print(y.shape, X.shape)
 
+    # Here the slaves receives infos
     # Master will give X, y, max_iter, gamma, lambda
     #X =
     #y =
@@ -38,15 +41,22 @@ def main():
 
     #Begin iteration for SGD
     for it in range(max_iter):
+        #Select only one randomly
         n = random.randint(0, num_examples - 1)
 
+        #Caltulate the SGD
         grad = calculate_stochastic_gradient(y, X, w, lambda_, n, num_examples)
+
+        #Derive the weight
         w -= gamma / (it + 1) * grad
 
-        # Now share w with other slaves and average result and continue
+        # Now wait and share w with other slaves and average the result and continue
 
-        if(it%10000 == 0):
-            print(it)
+        if(it % 10000 == 0):
+            print("Iteration = ", it)
+            print("Shape of w = ", w.shape)
+            print()
+
             #loss = compute_loss(y, X, w)
             #print(loss)
 
