@@ -3,6 +3,12 @@
 Project Description
 CS-449: Systems for Data Science
 
+## Group Member
+
+Kevin Kappel
+Aras Mumcuyan
+Orçun Gümüs
+
 
 ## BACKGROUND
 
